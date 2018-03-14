@@ -1,14 +1,12 @@
 const express = require("express");
 require("dotenv").config();
 const app = express();
-const routes = require("./routes/directors");
+const routes = require("./routes/");
 
 console.log("Hello from Express");
 
 // middleware stack starts here
-app.use(routes);
-
-
+app.use("/api/v1/", routes);
 
 
 // TODO: Add error handler

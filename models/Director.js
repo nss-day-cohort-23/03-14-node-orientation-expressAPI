@@ -4,7 +4,7 @@ const db = new sqlite3.Database("./db/mediaStore.sqlite");
 module.exports.getAll = () => {
   return new Promise( (resolve, reject) => {
     db.all(`SELECT * FROM directors`, (err, direx) => {
-      if (err) reject(err);
+      if (err) return reject(err);
       resolve(direx);
     });
   });
