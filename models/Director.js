@@ -9,3 +9,14 @@ module.exports.getAll = () => {
     });
   });
 };
+
+module.exports.getOne = (id) => {
+  return new Promise( (resolve, reject) => {
+    db.get(`SELECT * FROM directors
+    WHERE dir_id = ${id}`,
+    (err, movie) => {
+      if (err) return reject(err);
+      resolve(movie);
+    });
+  });
+};

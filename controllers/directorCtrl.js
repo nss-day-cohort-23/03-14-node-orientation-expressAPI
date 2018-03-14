@@ -1,5 +1,5 @@
 
-const { getAll } = require('../models/Director');
+const { getAll, getOne } = require('../models/Director');
 
 module.exports.getDirectors = (req, res, next) => {
   getAll()
@@ -8,3 +8,11 @@ module.exports.getDirectors = (req, res, next) => {
   })
   .catch( (err) => next(err));
 };
+
+module.exports.getOneDirector = ({params: {id}}, res, next) => {
+  getOne(id)
+  .then( (dir) => {
+    res.status(200).json(dir);
+  })
+  .catch( (err) => next(err));
+}
