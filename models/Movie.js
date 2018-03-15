@@ -15,13 +15,28 @@ module.exports.getAll = () => {
   });
 };
 
-module.exports.getOne = (id) => {
+module.exports.getOne = id => {
   return new Promise((resolve, reject) => {
     db.all(
       `SELECT movies.*, directors.name AS director
     FROM movies
     JOIN directors ON director_id = directors.dir_id
     WHERE movies.movie_id = ${id}`,
+      (err, movie) => {
+        if (err) return reject(err);
+        resolve(movie);
+      }
+    );
+  });
+};
+
+module.exports.getCurrent = () => {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT movies.*, directors.name AS director
+    FROM movies
+    JOIN directors ON director_id = directors.dir_id
+    WHERE movies.inTheaters = 1`,
       (err, movie) => {
         if (err) return reject(err);
         resolve(movie);
