@@ -17,7 +17,7 @@ module.exports.getAll = () => {
 
 module.exports.getOne = id => {
   return new Promise((resolve, reject) => {
-    db.all(
+    db.get(
       `SELECT movies.*, directors.name AS director
     FROM movies
     JOIN directors ON director_id = directors.dir_id

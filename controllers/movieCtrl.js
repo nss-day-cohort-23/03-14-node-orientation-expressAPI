@@ -15,7 +15,12 @@ module.exports.getAllMovies = ({query: {inTheaters}}, res, next) => {
 module.exports.getOneMovie = ({ params: { id } }, res, next) => {
   Movie.getOne(id)
     .then(movie => {
-      res.status(200).json(movie);
+      if (movie) {
+        res.status(200).json(movie);
+      } else {
+        let error = new Error("Movie not found")
+        next(error)
+      }
     })
     .catch(err => next(err));
 };
